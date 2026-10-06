@@ -33,7 +33,7 @@ export function CourseShell({ children }: { children: ReactNode }) {
   const goToResult = (slug: string, sectionId?: string) => {
     setOpen(false);
     setQuery("");
-    navigate({ to: "/unit/$slug", params: { slug }, hash: sectionId });
+    navigate({ to: "/unit/$slug", params: { slug }, ...(sectionId ? { hash: sectionId } : {}) });
   };
 
   return (
