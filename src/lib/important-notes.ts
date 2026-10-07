@@ -1,5 +1,6 @@
 // Detailed revision notes for the exam-priority topics, keyed by unit slug.
-export type NoteBlock = { heading: string; points: string[]; table?: { head: string[]; rows: string[][] } };
+export type NoteImage = { src: string; alt: string; caption?: string };
+export type NoteBlock = { heading: string; points: string[]; table?: { head: string[]; rows: string[][] }; images?: NoteImage[] };
 export type ImportantUnit = { slug: string; papers: string; blocks: NoteBlock[] };
 
 export const importantNotes: ImportantUnit[] = [
@@ -249,3 +250,7 @@ export const importantNotes: ImportantUnit[] = [
     ]},
   ]},
 ];
+
+export function getImportantNotes(slug: string): ImportantUnit | undefined {
+  return importantNotes.find((u) => u.slug === slug);
+}
