@@ -95,6 +95,7 @@ function SideNavigation({ pathname, resetProgress, onNavigate }: { pathname: str
     </nav>
     <div className="mt-3 border-t border-border pt-3">
       <Link to="/" onClick={onNavigate} className="flex min-h-9 items-center gap-2 rounded-md px-2 py-2 text-xs text-muted-foreground hover:bg-secondary hover:text-foreground"><BookOpen className="size-3.5" />Dashboard</Link>
+      <Link to="/important" onClick={onNavigate} className={cn("flex min-h-9 items-center gap-2 rounded-md px-2 py-2 text-xs hover:bg-secondary hover:text-foreground", pathname === "/important" ? "bg-secondary text-foreground" : "text-primary")}><PriorityMarker compact />Important Topics</Link>
       <Button variant="ghost" className="w-full justify-start gap-2 px-2" onClick={resetProgress}><RotateCcw className="size-3.5" />Reset progress</Button>
     </div>
   </>;
