@@ -5,6 +5,8 @@ import { Button } from "@/components/ui/button";
 import { useCourseProgress } from "@/hooks/use-course-progress";
 import { courseUnits, searchCourse } from "@/lib/course-data";
 import { cn } from "@/lib/utils";
+import { getUnitPriority } from "@/lib/exam-priorities";
+import { PriorityMarker } from "@/components/priority-marker";
 
 const accentClasses = { volt: "bg-primary", cyan: "bg-info", mag: "bg-highlight" } as const;
 
@@ -87,6 +89,7 @@ function SideNavigation({ pathname, resetProgress, onNavigate }: { pathname: str
         return <Link key={unit.slug} to="/unit/$slug" params={{ slug: unit.slug }} onClick={onNavigate} className={cn("flex min-h-9 items-center gap-2 rounded-md px-2 py-2 text-xs transition-colors hover:bg-secondary hover:text-foreground", active ? "bg-secondary text-foreground" : "text-muted-foreground")}>
           <span className={cn("h-3 w-1 shrink-0 rounded", accentClasses[unit.accent])} />
           <span className="truncate">{unit.number} {unit.shortTitle}</span>
+           {getUnitPriority(unit.slug) && <span className="ml-auto"><PriorityMarker compact /></span>}
         </Link>;
       })}
     </nav>
