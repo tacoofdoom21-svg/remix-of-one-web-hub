@@ -3,6 +3,8 @@ import { ArrowRight } from "lucide-react";
 import { CourseShell } from "@/components/course-shell";
 import { useCourseProgress } from "@/hooks/use-course-progress";
 import { courseUnits } from "@/lib/course-data";
+import { getUnitPriority } from "@/lib/exam-priorities";
+import { PriorityMarker } from "@/components/priority-marker";
 
 const title = "Circuit/101 — Computer Applications Study Hub";
 const description = "All nine Computer Applications units in one place: lessons, key terms, quizzes and progress tracking.";
@@ -30,6 +32,7 @@ function Dashboard() {
           <p className="eyebrow">Computer Applications · 9 units</p>
           <h1 className="mt-2 font-display text-3xl font-bold leading-tight sm:text-4xl">Your course, in one place.</h1>
           <p className="mt-3 max-w-[68ch] text-sm leading-6 text-muted-foreground">{description}</p>
+          <p className="mt-3 text-xs leading-5 text-muted-foreground"><PriorityMarker /> · Based on your Gemini analysis of 3 past-year papers. All nine units contain priority topics; stars within lessons identify the relevant subtopics. Not a guarantee of future exam questions.</p>
           <div className="mt-5 grid gap-2 sm:grid-cols-3">
             <Stat label="Course progress" value={`${percent}%`} />
             <Stat label="Sections done" value={String(progress.completedSections.length)} />
@@ -40,10 +43,12 @@ function Dashboard() {
           {courseUnits.map((unit) => {
             const done = unit.sections.filter((s) => progress.completedSections.includes(`${unit.slug}:${s.id}`)).length;
             const score = progress.quizScores[unit.slug];
+            const priority = getUnitPriority(unit.slug);
             return (
               <Link key={unit.slug} to="/unit/$slug" params={{ slug: unit.slug }} className="group flex flex-col rounded-lg border border-border bg-card p-5 transition-colors hover:border-primary">
-                <p className="eyebrow">Unit {unit.number}</p>
+                <div className="flex flex-wrap items-center justify-between gap-2"><p className="eyebrow">Unit {unit.number}</p>{priority && <PriorityMarker />}</div>
                 <h2 className="mt-2 font-display text-lg font-semibold">{unit.title}</h2>
+                {priority && <p className="mt-2 text-[10px] text-primary">{priority.papers} · {priority.count} priority sections</p>}
                 <p className="mt-2 line-clamp-3 flex-1 text-xs leading-5 text-muted-foreground">{unit.description}</p>
                 <div className="mt-4 flex items-center justify-between text-[11px] text-muted-foreground">
                   <span>{done}/{unit.sections.length} sections{score !== undefined ? ` · quiz ${score}%` : ""}</span>
