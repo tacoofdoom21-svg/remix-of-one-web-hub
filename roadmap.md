@@ -4,6 +4,6 @@
 - [x] Confirm the pasted list is readable; no screenshot is needed.
 
 # Detailed important topics
-- [ ] Reread all nine slide files and compile detailed, cited priority notes.
-- [ ] Add an Important Topics page with topic navigation, search, and relevant original slide images.
-- [ ] Verify topic coverage, page navigation, and image rendering.
+- [x] Reread all nine slide files and compile detailed, cited priority notes.
+- [x] Add an Important Topics page with topic navigation, search, and relevant original slide images.
+- [x] Verify topic coverage, page navigation, and image rendering.
